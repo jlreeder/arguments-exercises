@@ -1,10 +1,6 @@
-Function.prototype.myBind = function (boundObject) {
-  let args = Array.from(arguments);
-  const that = this;
-
-  return function() {
-    let callTimeArgs = Array.from(arguments);
-    that.apply(boundObject, args.slice(1).concat(callTimeArgs));
+Function.prototype.myBind = function (boundObject, ...bindArgs) {
+  return (...callArgs) => {
+    this.apply(boundObject, bindArgs.concat(callArgs));
   };
 };
 
@@ -27,12 +23,12 @@ const breakfast = new Cat("Breakfast");
 // true
 
 // bind time args are "meow" and "Kush", no call time args
-// markov.says.myBind(breakfast, "meow", "Kush")();
+ markov.says.myBind(breakfast, "meow", "Kush")();
 // Breakfast says meow to Kush!
 // true
 
 // no bind time args (other than context), call time args are "meow" and "me"
-markov.says.myBind(breakfast)("meow", "a tree");
+ // markov.says.myBind(breakfast)("meow", "a tree");
 // Breakfast says meow to a tree!
 // true
 
