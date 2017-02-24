@@ -11,7 +11,7 @@ let curriedSum = (numArgs) => {
     numbers.push(newNum);
 
     if (numbers.length === numArgs) {
-      return sumNums(numbers);
+      return sumNums(...numbers);
     } else {
       return _curriedSum;
     }
@@ -20,7 +20,7 @@ let curriedSum = (numArgs) => {
   return _curriedSum;
 };
 
-const sum = curriedSum(4);
+// const sum = curriedSum(4);
 // console.log(sum(5)(30)(20)(1)); // => 56
 
 Function.prototype.myCurry = function(numArgs) {
@@ -30,7 +30,7 @@ Function.prototype.myCurry = function(numArgs) {
     numbers.push(newNum);
 
     if (numbers.length === numArgs) {
-      return this(numbers); //this refers to sumNums
+      return this(...numbers); //this refers to sumNums
     } else {
       return _myCurry;
     }
@@ -39,7 +39,7 @@ Function.prototype.myCurry = function(numArgs) {
   return _myCurry;
 };
 
-// console.log(sumNums.myCurry(3)(4)(20)(6));
+console.log(sumNums.myCurry(3)(4)(20)(6));
 
 
 Function.prototype.myCurryApply = function(numArgs) {
@@ -58,4 +58,4 @@ Function.prototype.myCurryApply = function(numArgs) {
   return _myCurry;
 };
 
-console.log(sumNums.myCurryApply(3)(4)(20)(6));
+// console.log(sumNums.myCurryApply(3)(4)(20)(6));
