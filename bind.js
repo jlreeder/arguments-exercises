@@ -1,7 +1,9 @@
-Function.prototype.myBind = function (boundObject, ...bindArgs) {
-  return (...callArgs) => { this.apply(boundObject, bindArgs.concat(callArgs));
+Function.prototype.myBind = function (ctx, ...bindArgs) {
+  return (...callArgs) => {
+    this.call(ctx, ...bindArgs.concat(callArgs));
   };
 };
+
 
 class Cat {
   constructor(name) {
